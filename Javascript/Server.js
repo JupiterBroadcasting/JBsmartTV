@@ -2,9 +2,13 @@ var Server =
 {
     /* Callback function to be set by client */
     dataReceivedCallback : null,
-    
+
     XHRObj : null,
     url : "XML/videoList.xml"
+
+//    refactor RSS feed to be same format of videoList.xml
+//    url : "http://feeds.feedburner.com/JupiterBroadcasting"
+//    url : "http://feeds2.feedburner.com_AllJupiterVideos"
 };
 
 Server.init = function()
@@ -16,7 +20,7 @@ Server.init = function()
         this.XHRObj.destroy();  // Save memory
         this.XHRObj = null;
     }
-    
+
     return success;
 };
 
@@ -26,7 +30,7 @@ Server.fetchVideoList = function()
     {
         this.XHRObj = new XMLHttpRequest();
     }
-    
+
     if (this.XHRObj)
     {
         this.XHRObj.onreadystatechange = function()
@@ -36,7 +40,7 @@ Server.fetchVideoList = function()
                     Server.createVideoList();
                 }
             };
-            
+
         this.XHRObj.open("GET", this.url, true);
         this.XHRObj.send(null);
      }
@@ -55,7 +59,7 @@ Server.createVideoList = function()
     else
     {
         var xmlElement = this.XHRObj.responseXML.documentElement;
-        
+
         if (!xmlElement)
         {
             alert("Failed to get valid XML");
@@ -65,17 +69,17 @@ Server.createVideoList = function()
             // Parse RSS
             // Get all "item" elements
             var items = xmlElement.getElementsByTagName("item");
-            
+
             var videoNames = [ ];
             var videoURLs = [ ];
             var videoDescriptions = [ ];
-            
+
             for (var index = 0; index < items.length; index++)
             {
                 var titleElement = items[index].getElementsByTagName("title")[0];
                 var descriptionElement = items[index].getElementsByTagName("description")[0];
                 var linkElement = items[index].getElementsByTagName("link")[0];
-                
+
                 if (titleElement && descriptionElement && linkElement)
                 {
                     videoNames[index] = titleElement.firstChild.data;
@@ -83,11 +87,11 @@ Server.createVideoList = function()
                     videoDescriptions[index] = descriptionElement.firstChild.data;
                 }
             }
-        
+
             Data.setVideoNames(videoNames);
             Data.setVideoURLs(videoURLs);
             Data.setVideoDescriptions(videoDescriptions);
-            
+
             if (this.dataReceivedCallback)
             {
                 this.dataReceivedCallback();    /* Notify all data is received and stored */

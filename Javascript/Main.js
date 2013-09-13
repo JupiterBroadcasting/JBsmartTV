@@ -5,14 +5,15 @@ var Main =
 {
     selectedVideo : 0,
     mode : 0,
+    advanced : false,
     mute : 0,
-    
+
     UP : 0,
     DOWN : 1,
 
     WINDOW : 0,
     FULLSCREEN : 1,
-    
+
     NMUTE : 0,
     YMUTE : 1
 };
@@ -23,7 +24,7 @@ Main.onLoad = function()
     {
         Display.setVolume( Audio.getVolume() );
         Display.setTime(0);
-        
+
         Player.stopCallback = function()
         {
             /* Return to windowed mode when video is stopped
@@ -43,7 +44,7 @@ Main.onLoad = function()
         // Enable key event processing
         this.enableKeys();
 
-        widgetAPI.sendReadyEvent();    
+        widgetAPI.sendReadyEvent();
     }
     else
     {
@@ -59,7 +60,7 @@ Main.onUnload = function()
 Main.updateCurrentVideo = function(move)
 {
     Player.setVideoURL( Data.getVideoURL(this.selectedVideo) );
-    
+
     Display.setVideoListPosition(this.selectedVideo, move);
 
     Display.setDescription( Data.getVideoDescription(this.selectedVideo));
@@ -74,46 +75,46 @@ Main.keyDown = function()
 {
     var keyCode = event.keyCode;
     alert("Key pressed: " + keyCode);
-    
+
     switch(keyCode)
     {
         case tvKey.KEY_RETURN:
         case tvKey.KEY_PANEL_RETURN:
             alert("RETURN");
             Player.stopVideo();
-            widgetAPI.sendReturnEvent(); 
-            break;    
+            widgetAPI.sendReturnEvent();
             break;
-    
+            break;
+
         case tvKey.KEY_PLAY:
             alert("PLAY");
             this.handlePlayKey();
             Bitrate.init();
-            
+
             var playerplugin =  document.getElementById("pluginPlayer");
             Bitrate.setPlayer(playerplugin);
-            
-            Bitrate.startMonitor();            
+
+            Bitrate.startMonitor();
             break;
-            
+
         case tvKey.KEY_STOP:
             alert("STOP");
             Player.stopVideo();
             Bitrate.stopMonitor();
             Bitrate.deinit();
             break;
-            
+
         case tvKey.KEY_PAUSE:
             alert("PAUSE");
             this.handlePauseKey();
             break;
-            
+
         case tvKey.KEY_FF:
             alert("FF");
             if(Player.getState() != Player.PAUSED)
                 Player.skipForwardVideo();
             break;
-        
+
         case tvKey.KEY_RW:
             alert("RW");
             if(Player.getState() != Player.PAUSED)
@@ -126,43 +127,50 @@ Main.keyDown = function()
             if(this.mute == 0)
                 Audio.setRelativeVolume(0);
             break;
-            
+
         case tvKey.KEY_VOL_DOWN:
         case tvKey.KEY_PANEL_VOL_DOWN:
             alert("VOL_DOWN");
             if(this.mute == 0)
                 Audio.setRelativeVolume(1);
-            break;      
+            break;
 
         case tvKey.KEY_DOWN:
             alert("DOWN");
             this.selectNextVideo(this.DOWN);
             break;
-            
+
         case tvKey.KEY_UP:
             alert("UP");
             this.selectPreviousVideo(this.UP);
-            break;            
+            break;
 
         case tvKey.KEY_ENTER:
         case tvKey.KEY_PANEL_ENTER:
             alert("ENTER");
             this.toggleMode();
-            if( this.mode == Main.WINDOW)
-            {
-                Bitrate.hideGraph();
-             }
-             if( this.mode == Main.FULLSCREEN)
-            {
-                Bitrate.showGraph();
-             }              
             break;
-        
+
         case tvKey.KEY_MUTE:
             alert("MUTE");
             this.muteMode();
             break;
-            
+
+        case tvKey.KEY_RED:
+            alert("KEY_RED");
+
+            this.advanced = !this.advanced;
+
+            if( this.mode === Main.FULLSCREEN ) {
+                if( this.advanced === true ) {
+                    Bitrate.showGraph();
+                } else {
+                    Bitrate.hideGraph();
+                }
+            }
+
+            break;
+
         default:
             alert("Unhandled key");
             break;
@@ -176,11 +184,11 @@ Main.handlePlayKey = function()
         case Player.STOPPED:
             Player.playVideo();
             break;
-            
+
         case Player.PAUSED:
             Player.resumeVideo();
             break;
-            
+
         default:
             alert("Ignoring play key, not in correct state");
             break;
@@ -194,7 +202,7 @@ Main.handlePauseKey = function()
         case Player.PLAYING:
             Player.pauseVideo();
             break;
-        
+
         default:
             alert("Ignoring pause key, not in correct state");
             break;
@@ -204,7 +212,7 @@ Main.handlePauseKey = function()
 Main.selectNextVideo = function(down)
 {
     Player.stopVideo();
-    
+
     this.selectedVideo = (this.selectedVideo + 1) % Data.getVideoCount();
 
     this.updateCurrentVideo(down);
@@ -213,7 +221,7 @@ Main.selectNextVideo = function(down)
 Main.selectPreviousVideo = function(up)
 {
     Player.stopVideo();
-    
+
     if (--this.selectedVideo < 0)
     {
         this.selectedVideo += Data.getVideoCount();
@@ -227,9 +235,9 @@ Main.setFullScreenMode = function()
     if (this.mode != this.FULLSCREEN)
     {
         Display.hide();
-        
+
         Player.setFullscreen();
-        
+
         this.mode = this.FULLSCREEN;
     }
 };
@@ -239,9 +247,9 @@ Main.setWindowMode = function()
     if (this.mode != this.WINDOW)
     {
         Display.show();
-        
+
         Player.setWindow();
-        
+
         this.mode = this.WINDOW;
     }
 };
@@ -253,11 +261,11 @@ Main.toggleMode = function()
         case this.WINDOW:
             this.setFullScreenMode();
             break;
-            
+
         case this.FULLSCREEN:
             this.setWindowMode();
             break;
-            
+
         default:
             alert("ERROR: unexpected mode in toggleMode");
             break;
@@ -281,7 +289,7 @@ Main.noMuteMode = function()
 {
     if (this.mute != this.NMUTE)
     {
-        Audio.plugin.SetSystemMute(false); 
+        Audio.plugin.SetSystemMute(false);
         document.getElementById("volumeBar").style.backgroundImage = "url(Images/videoBox/volumeBar.png)";
         document.getElementById("volumeIcon").style.backgroundImage = "url(Images/videoBox/volume.png)";
         Display.setVolume( Audio.getVolume() );
@@ -296,11 +304,11 @@ Main.muteMode = function()
         case this.NMUTE:
             this.setMuteMode();
             break;
-            
+
         case this.YMUTE:
             this.noMuteMode();
             break;
-            
+
         default:
             alert("ERROR: unexpected mode in muteMode");
             break;
