@@ -1,7 +1,6 @@
 /* Defaults */
 
-*
-{
+* {
     padding: 0;
     margin: 0;
     border: 0;
@@ -11,24 +10,21 @@
 }
 
 /* Layout */
-body
-{
+body {
     width: 960px; height: 540px;
 }
 
-#main
-{
+#main {
      position: absolute;
      left: 0px; top: 0px;
      width: 960px; height: 540px;
 }
 
-#logo
-{
-	position: absolute;
-	top: 0px;
-	height: 35px;
-	width: 100%;
+#logo {
+    position: absolute;
+    top: 0px;
+    height: 35px;
+    width: 100%;
     background-image: url("../Images/BgLogo.png");
     background-repeat:repeat-x;
     font-size:25px;
@@ -37,128 +33,110 @@ body
 }
 
 /* Right Half */
-#rightHalf
-{
+#rightHalf {
     position: absolute;
     left:420px; top: -5px;
     width: 540px; height: 540px;
 }
 
-#videoBox_top
-{
+#videoBox_top {
     position:absolute;
     left:30px; top:55px;
     width:488px; height:8px;
     background-image:url("../Images/videoBox/top.png");
 }
 
-#videoBox_left
-{
+#videoBox_left {
     position:absolute;
     left:30px; top:55px;
     width:8px; height:278px;
     background-image:url("../Images/videoBox/left.png");
 }
 
-#videoBox_right
-{
+#videoBox_right {
     position:absolute;
     left:510px; top:55px;
     width:8px; height:278px;
     background-image:url("../Images/videoBox/right.png");
 }
 
-#videoBox_bottom
-{
+#videoBox_bottom {
     position:absolute;
     left:30px; top:333px;
     width:488px; height:56px;
     background-image:url("../Images/videoBox/bottom.png");
 }
 
-#time
-{
+#time {
     position:absolute;
     left:8px; top:0px;
     width:472px; height:24px;
 }
 
-#progressBarBG
-{
+#progressBarBG {
     position:absolute;
     left:4px; top:8px;
     width:400px; height:8px;
     background-image:url("../Images/videoBox/progressBarBG.png");
 }
 
-#progressBar
-{
+#progressBar {
     position:absolute;
     left:0px; top:0px;
     width:0%; height:8px;
     background-image:url("../Images/videoBox/progressBar.png");
 }
 
-#timeInfo
-{
+#timeInfo {
     position:absolute;
     left:408px; top:4px;
     width:60px; height:16px;
-
     text-align:center;
     font-size:12px;
 }
 
-#volume
-{
+#volume {
     position:absolute;
     left:8px; top:24px;
     width:472px; height:24px;
 }
 
-#volumeIcon
-{
+#volumeIcon {
     position:absolute;
     left:4px; top:4px;
     width:17px; height:16px;
     background-image:url("../Images/videoBox/volume.png");
 }
 
-#volumeBarBG
-{
+#volumeBarBG {
     position:absolute;
     left:22px; top:8px;
     width:144px; height:8px;
     background-image:url("../Images/videoBox/volumeBarBG.png");
 }
 
-#volumeBar
-{
+#volumeBar {
     position:absolute;
     left:0px; top:0px;
     width:0%; height:8px;
     background-image:url("../Images/videoBox/volumeBar.png");
 }
 
-#volumeInfo
-{
+#volumeInfo {
     position:absolute;
     left:168px; top:4px;
     width:32px; height:16px;
-
     text-align:left;
     font-size:12px;
 }
 
-#videoControl
-{
+#videoControl {
     position:absolute;
     left:250px; top:25px;
     width:100px; height:20px;
 }
 
-#rewind
-{
+#rewind {
     position:absolute;
     left:0px; top:0px;
     width:20px; height:20px;
@@ -166,8 +144,7 @@ body
     opacity:0.2;
 }
 
-#play
-{
+#play {
     position:absolute;
     left:20px; top:0px;
     width:20px; height:20px;
@@ -175,8 +152,7 @@ body
     opacity:1.0;
 }
 
-#stop
-{
+#stop {
     position:absolute;
     left:40px; top:0px;
     width:20px; height:20px;
@@ -184,8 +160,7 @@ body
     opacity:0.2;
 }
 
-#pause
-{
+#pause {
     position:absolute;
     left:60px; top:0px;
     width:20px; height:20px;
@@ -193,8 +168,7 @@ body
     opacity:0.2;
 }
 
-#forward
-{
+#forward {
     position:absolute;
     left:80px; top:0px;
     width:20px; height:20px;
@@ -202,38 +176,32 @@ body
     opacity:0.2;
 }
 
-#status
-{
+#status {
     position:absolute;
     left:390px; top:28px;
     width: 98px; height:16px;
-
     text-align:left;
     font-size:12px;
 }
 
-#description_top
-{
+#description_top {
     position:absolute;
     left:30px; top:390px;
     width:488px; height:50px;
     background-image:url("../Images/descriptionBox/description_top.png");
 }
 
-#description_bottom
-{
+#description_bottom {
     position:absolute;
     left:30px; top:440px;
     width:488px; height:50px;
     background-image:url("../Images/descriptionBox/description_bottom.png");
 }
 
-#description
-{
+#description {
     position:absolute;
     left:45px; top:400px;
     width:458px; height:80px;
-
     text-align:left;
     font-size:16px;
     overflow:hidden;
@@ -241,88 +209,73 @@ body
 }
 
 /* Left Half */
-#leftHalf
-{
+#leftHalf {
     position:absolute;
     left: 0px; top:0px;
     width:420px; height:540px;
 }
 
-#videoList
-{
+#videoList {
     position:absolute;
     left:30px; top:55px;
     width: 390px; height:430px;
     background-image:url("../Images/listBox/listBox.png");
 }
 
-#video0
-{
+#video0 {
     position:absolute;
     left:30px; top:70px;
     width:330px; height:47px;
-
     background-repeat:no-repeat;
     padding-left:20px;
     padding-top:10px;
 }
 
-#video1
-{
+#video1 {
     position:absolute;
     left:30px; top:130px;
     width:330px; height:47px;
-
     background-repeat:no-repeat;
     padding-left:20px;
     padding-top:10px;
 }
 
-#video2
-{
+#video2 {
     position:absolute;
     left:30px; top:190px;
     width:330px; height:47px;
-
     background-repeat:no-repeat;
     padding-left:20px;
     padding-top:10px;
 }
 
-#video3
-{
+#video3 {
     position:absolute;
     left:30px; top:250px;
     width:330px; height:47px;
-
     background-repeat:no-repeat;
     padding-left:20px;
     padding-top:10px;
 }
 
-#video4
-{
+#video4 {
     position:absolute;
     left:30px; top:310px;
     width:330px; height:47px;
-
     background-repeat:no-repeat;
     padding-left:20px;
     padding-top:10px;
 }
 
-#videoCount
-{
+#videoCount {
     position:absolute;
     left:330px; top:30px;
     width:30px; height:20px;
-
     text-align:left;
     font-size:12px;
 }
 
-#previous
-{
+#previous {
     position:absolute;
     left:210px; top:80px;
     width:30px; height:30px;
@@ -330,8 +283,7 @@ body
     opacity:0.2;
 }
 
-#next
-{
+#next {
     position:absolute;
     left:210px; top:430px;
     width:30px; height:30px;
@@ -339,25 +291,22 @@ body
     opacity:0.2;
 }
 
-.style_videoList
-{
+.style_videoList {
     color:#FFFFFF;
     text-align:left;
     font-size:20px;
 }
 
-#navi
-{
-	position: absolute;
-	top: 505px;
-	height: 35px;
-	width: 100%;
+#navi {
+    position: absolute;
+    top: 505px;
+    height: 35px;
+    width: 100%;
     background-image: url("../Images/BgNavigator.png");
     background-repeat:repeat-x;
 }
 
-#help_navi
-{
+#help_navi {
     position:absolute;
     left:275px; top:5px;
     width:785px; height:28px;
@@ -369,45 +318,39 @@ body
     font-size:20px;
 }
 
-
-.style_bitrate
-{
-	position:absolute;
-	left:65px; top:313px;
-	width: 830px; height:220px;
-	vertical-align:bottom;
-	z-index:20;
-	opacity:0.5;
-	border: none;
-	background-image:url("../images/bitrate/bitrateBG4.png");
+.style_bitrate {
+    position:absolute;
+    left:65px; top:313px;
+    width: 830px; height:220px;
+    vertical-align:bottom;
+    z-index:20;
+    opacity:0.5;
+    border: none;
+    background-image:url("../images/bitrate/bitrateBG4.png");
 }
 
-.style_bitratebar
-{
-	position:absolute;
-	left:1px; top:1px;
-	width: 1px; height:1px;
-	opacity:0.5;
-	border: none;
-	background-image: url("../images/bitrate/blue128.png");
+.style_bitratebar {
+    position:absolute;
+    left:1px; top:1px;
+    width: 1px; height:1px;
+    opacity:0.5;
+    border: none;
+    background-image: url("../images/bitrate/blue128.png");
 }
 
-.style_bandwidthbar
-{
-	position:absolute;
-	left:1px; top:1px;
-	width: 1px; height:1px;
-	opacity:0.5;
-	border: none;
-	background-image: url("../images/bitrate/red128.png");
+.style_bandwidthbar {
+    position:absolute;
+    left:1px; top:1px;
+    width: 1px; height:1px;
+    opacity:0.5;
+    border: none;
+    background-image: url("../images/bitrate/red128.png");
 }
 
-#bitrateListTable
-{
+#bitrateListTable {
      height: 220px;
 }
 
-#bitrateListTable tr
-{
+#bitrateListTable tr {
     vertical-align: bottom;
 }

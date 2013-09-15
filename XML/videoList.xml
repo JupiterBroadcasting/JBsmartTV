@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <rss version="2.0">
     <channel>
-	    <item>
-		    <title>Jupiter Broadcasting</title>
-		    <link>http://videocdn-us.geocdn.scaleengine.net/jblive-iphone/live/jblive.stream/playlist.m3u8|COMPONENT=HLS</link>
-		    <description>hls stream</description>
-	    </item>
+        <item>
+            <title>Jupiter Broadcasting</title>
+            <link>http://videocdn-us.geocdn.scaleengine.net/jblive-iphone/live/jblive.stream/playlist.m3u8|COMPONENT=HLS</link>
+            <description>JB Live Stream</description>
+        </item>
     </channel>
 </rss>

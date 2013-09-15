@@ -1,22 +1,18 @@
-var Server =
-{
+var Server = {
     /* Callback function to be set by client */
     dataReceivedCallback : null,
 
     XHRObj : null,
     url : "XML/videoList.xml"
-
 //    refactor RSS feed to be same format of videoList.xml
 //    url : "http://feeds.feedburner.com/JupiterBroadcasting"
 //    url : "http://feeds2.feedburner.com_AllJupiterVideos"
 };
 
-Server.init = function()
-{
+Server.init = function() {
     var success = true;
 
-    if (this.XHRObj)
-    {
+    if (this.XHRObj) {
         this.XHRObj.destroy();  // Save memory
         this.XHRObj = null;
     }
@@ -24,48 +20,34 @@ Server.init = function()
     return success;
 };
 
-Server.fetchVideoList = function()
-{
-    if (this.XHRObj == null)
-    {
+Server.fetchVideoList = function() {
+    if (this.XHRObj == null) {
         this.XHRObj = new XMLHttpRequest();
     }
 
-    if (this.XHRObj)
-    {
-        this.XHRObj.onreadystatechange = function()
-            {
-                if (Server.XHRObj.readyState == 4)
-                {
-                    Server.createVideoList();
-                }
-            };
+    if (this.XHRObj) {
+        this.XHRObj.onreadystatechange = function() {
+            if (Server.XHRObj.readyState == 4) {
+                Server.createVideoList();
+            }
+        };
 
         this.XHRObj.open("GET", this.url, true);
         this.XHRObj.send(null);
-     }
-    else
-    {
+     } else {
         alert("Failed to create XHR");
     }
 };
 
-Server.createVideoList = function()
-{
-    if (this.XHRObj.status != 200)
-    {
+Server.createVideoList = function() {
+    if (this.XHRObj.status != 200) {
         Display.status("XML Server Error " + this.XHRObj.status);
-    }
-    else
-    {
+    } else {
         var xmlElement = this.XHRObj.responseXML.documentElement;
 
-        if (!xmlElement)
-        {
+        if (!xmlElement) {
             alert("Failed to get valid XML");
-        }
-        else
-        {
+        } else {
             // Parse RSS
             // Get all "item" elements
             var items = xmlElement.getElementsByTagName("item");
@@ -74,14 +56,12 @@ Server.createVideoList = function()
             var videoURLs = [ ];
             var videoDescriptions = [ ];
 
-            for (var index = 0; index < items.length; index++)
-            {
+            for (var index = 0; index < items.length; index++) {
                 var titleElement = items[index].getElementsByTagName("title")[0];
                 var descriptionElement = items[index].getElementsByTagName("description")[0];
                 var linkElement = items[index].getElementsByTagName("link")[0];
 
-                if (titleElement && descriptionElement && linkElement)
-                {
+                if (titleElement && descriptionElement && linkElement) {
                     videoNames[index] = titleElement.firstChild.data;
                     videoURLs[index] = linkElement.firstChild.data;
                     videoDescriptions[index] = descriptionElement.firstChild.data;
@@ -92,8 +72,7 @@ Server.createVideoList = function()
             Data.setVideoURLs(videoURLs);
             Data.setVideoDescriptions(videoDescriptions);
 
-            if (this.dataReceivedCallback)
-            {
+            if (this.dataReceivedCallback) {
                 this.dataReceivedCallback();    /* Notify all data is received and stored */
             }
         }
