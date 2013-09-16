@@ -6,7 +6,7 @@ var Player = {
     originalSource : null,
     STOPPED : 0,
     PLAYING : 1,
-    PAUSED : 2,  
+    PAUSED : 2,
     FORWARD : 3,
     REWIND : 4
 };
@@ -15,37 +15,37 @@ Player.init = function() {
     var success = true;
     this.state = this.STOPPED;
     this.plugin = document.getElementById("pluginPlayer");
-    
+
     if (!this.plugin) {
          success = false;
     } else {
         var mwPlugin = document.getElementById("pluginTVMW");
-        
+
         if (!mwPlugin) {
             success = false;
         } else {
             /* Save current TV Source */
             this.originalSource = mwPlugin.GetSource();
-            
+
             /* Set TV source to media player plugin */
             mwPlugin.SetMediaSource();
         }
     }
-    
+
     this.setWindow();
     this.plugin.OnCurrentPlayTime = 'Player.setCurTime';
     this.plugin.OnStreamInfoReady = 'Player.setTotalTime';
     this.plugin.OnBufferingStart = 'Player.onBufferingStart';
     this.plugin.OnBufferingProgress = 'Player.onBufferingProgress';
     this.plugin.OnBufferingComplete = 'Player.onBufferingComplete';
-            
+
     return success;
 };
 
 Player.deinit = function() {
     var mwPlugin = document.getElementById("pluginTVMW");
-    
-    if (mwPlugin && (this.originalSource != null) ) {
+
+    if (mwPlugin && (this.originalSource !== null) ) {
         /* Restore original TV source before closing the widget */
         mwPlugin.SetSource(this.originalSource);
         alert("Restore source to " + this.originalSource);
@@ -68,7 +68,7 @@ Player.setVideoURL = function(url) {
 };
 
 Player.playVideo = function() {
-    if (this.url == null) {
+    if (this.url === null) {
         alert("No videos to play");
     } else {
         this.state = this.PLAYING;
@@ -80,7 +80,7 @@ Player.playVideo = function() {
         Display.status("Play");
         this.setWindow();
         this.plugin.SetInitialBuffer(640*1024);
-        this.plugin.SetPendingBuffer(640*1024); 
+        this.plugin.SetPendingBuffer(640*1024);
         this.plugin.Play( this.url );
         Audio.plugin.SetSystemMute(false);
     }
@@ -98,7 +98,7 @@ Player.pauseVideo = function(){
 };
 
 Player.stopVideo = function(){
-    if (this.state != this.STOPPED){
+    if (this.state !== this.STOPPED){
         this.state = this.STOPPED;
         document.getElementById("play").style.opacity = '1.0';
         document.getElementById("stop").style.opacity = '0.2';
@@ -142,7 +142,7 @@ Player.getState = function() {
     return this.state;
 };
 
-// Global functions called directly by the player 
+// Global functions called directly by the player
 
 Player.onBufferingStart = function() {
     Display.status("Buffering...");

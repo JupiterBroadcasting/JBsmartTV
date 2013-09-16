@@ -21,13 +21,13 @@ Server.init = function() {
 };
 
 Server.fetchVideoList = function() {
-    if (this.XHRObj == null) {
+    if (this.XHRObj === null) {
         this.XHRObj = new XMLHttpRequest();
     }
 
     if (this.XHRObj) {
         this.XHRObj.onreadystatechange = function() {
-            if (Server.XHRObj.readyState == 4) {
+            if (Server.XHRObj.readyState === 4) {
                 Server.createVideoList();
             }
         };
@@ -40,7 +40,7 @@ Server.fetchVideoList = function() {
 };
 
 Server.createVideoList = function() {
-    if (this.XHRObj.status != 200) {
+    if (this.XHRObj.status !== 200) {
         Display.status("XML Server Error " + this.XHRObj.status);
     } else {
         var xmlElement = this.XHRObj.responseXML.documentElement;

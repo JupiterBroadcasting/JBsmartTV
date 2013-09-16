@@ -2,6 +2,13 @@
  * @author Samsung
  */
 
+/*
+ *
+ * @param {type} br
+ * @param {type} bb
+ * @param {type} ctime
+ * @returns {bbDataItem}
+ */
 
 var bbDataItem = function(br, bb, ctime) {
     this.bitrate = br;             //unit : bps
@@ -22,7 +29,7 @@ var Bitrate = {
     dataSamplePeriod:0,
     iCurPlayTime:0,
     nPixelPerMbps:0,
-    bInit:0, 
+    bInit:0,
     timerInterval:2,
     timerCount:0,
     bitrateLevelArray: null,
@@ -35,7 +42,7 @@ Bitrate.print = function(msg) {
 };
 
 Bitrate.init = function() {
-    if( this.bInit == 0 ) {
+    if( this.bInit === 0 ) {
         this.bInit = 1;
         this.print("Bitrate.init ");
         this.barSize =24;
@@ -57,13 +64,13 @@ Bitrate.init = function() {
         }
         this.resetGraphBar();
         this.nPixelPerMbps = 50.0;  //default bitrate range = 0~4Mbps
-        this.pluginPlayer = null; 
+        this.pluginPlayer = null;
     }
 };
 
 
 Bitrate.deinit = function() {
-    if( this.bInit == 1 ) {
+    if( this.bInit === 1 ) {
         this.bInit = 0;
         this.print("Bitrate.deinit ");
         this.graph  = document.getElementById("bitrateList");
@@ -107,7 +114,7 @@ Bitrate.setGraphBitrateRange= function(bitraterange /*Mbps*/) {
 };
 
 Bitrate.BitRateTimerCount= function() {
-    if( this.bRunTimer == 1 ) {
+    if( this.bRunTimer === 1 ) {
         var curBandwidth = 1;
         var contentBitrate = this.pluginPlayer.GetCurrentBitrates();
 
@@ -122,14 +129,14 @@ Bitrate.BitRateTimerCount= function() {
         this.iCurPlayTime = HasSampleTime;
 
         //draw bitrate graph
-        if( this.bShowBitrateGraph == 1) {
+        if( this.bShowBitrateGraph === 1) {
             this.drawData();
         }
     }
 };
 
 Bitrate.startMonitor = function() {
-    if( this.bRunTimer  == 0 ) {
+    if( this.bRunTimer  === 0 ) {
         this.print("Bitrate.startMonitor  ");
         this.bRunTimer  = 1;
         this.timerInterval = 2;
@@ -140,7 +147,7 @@ Bitrate.startMonitor = function() {
 };
 
 Bitrate.stopMonitor=function() {
-    if(this.timer != null ) {
+    if(this.timer !== null ) {
         this.print("Bitrate.stopMonitor  ");
         clearInterval(this.timer);
         this.timer = null;
@@ -165,8 +172,8 @@ Bitrate.addData = function(bitrate, bandwidth, time) { //bps, bps, second
 };
 
 Bitrate.showGraph = function() {
-    if( this.bInit == 1 ) {
-        if( this.bShowBitrateGraph == 0 ) {
+    if( this.bInit === 1 ) {
+        if( this.bShowBitrateGraph === 0 ) {
             this.print("Bitrate.showGraph ");
             this.graph.style.visibility="visible";
             this.bShowBitrateGraph = 1;
@@ -175,8 +182,8 @@ Bitrate.showGraph = function() {
 };
 
 Bitrate.hideGraph= function() {
-    if( this.bInit == 1 ) {
-        if( this.bShowBitrateGraph == 1 ) {
+    if( this.bInit === 1 ) {
+        if( this.bShowBitrateGraph === 1 ) {
             this.print("Bitrate.hideGraph ");
             this.graph.style.visibility="hidden";
             this.bShowBitrateGraph = 0;
@@ -191,7 +198,7 @@ Bitrate.getbarIndex = function(bbdataitem) {
         return -1;
     }
 
-    if( this.iCurPlayTime == bbdataitem.time ) {
+    if( this.iCurPlayTime === bbdataitem.time ) {
         barIndex = this.barSize - 1;
     } else {
         barIndex = this.barSize - Math.round( (this.iCurPlayTime-bbdataitem.time )/this.dataSamplePeriod );
@@ -204,7 +211,7 @@ Bitrate.drawData = function() {
     var iCur;
     var idata;
 
-    //Bitrate.print("Bitrate.drawData  ");	
+    //Bitrate.print("Bitrate.drawData  ");
     this.resetGraphBar();
     //*
     var tempBBSorted = new Array();
@@ -212,30 +219,30 @@ Bitrate.drawData = function() {
         tempBBSorted[i] = -1;
     }
 
-    //this.print("Bitrate.drawData : 1"); 
+    //this.print("Bitrate.drawData : 1");
     //sort the Bitrate array and save the sorted index to tempBBsorted[]
     for(var i=0;i<this.dataSize;i++) {
         idata = this.bbdata[i];
-        if( idata != null ) {
+        if( idata !== null ) {
             iCur = this.getbarIndex(idata);
             if( iCur >= 0 ) {
                 tempBBSorted[iCur] = i;
             }
         }
     }
-//    this.print("Bitrate.drawData : 2"); 
+//    this.print("Bitrate.drawData : 2");
 
     //sort the data
     for(var i=0;i<this.dataSize;i++) {
         iCur = tempBBSorted[i];
         if( iCur >= 0 ) {
             idata = this.bbdata[iCur];
-            if( idata != null ) {
+            if( idata !== null ) {
                 this.drawBar( idata );
             }
         }
     }
-//    this.print("Bitrate.drawData : 3"); 
+//    this.print("Bitrate.drawData : 3");
 };
 
 Bitrate.resetGraphBar = function() {
@@ -243,12 +250,12 @@ Bitrate.resetGraphBar = function() {
     var i;
     for(i=0;i<this.barSize;i++) {
         var divBitrateBar = document.getElementById("bitrate"+i);
-        if( divBitrateBar  != null ) {
+        if( divBitrateBar  !== null ) {
             divBitrateBar.style.visibility="hidden";
         }
 
         var divBandwidthBar = document.getElementById("bandwidth"+i);
-        if( divBandwidthBar  != null ) {
+        if( divBandwidthBar  !== null ) {
             divBandwidthBar.style.visibility="hidden";
         }
     }
@@ -266,7 +273,7 @@ Bitrate.drawBar = function( bbdataitem) {
         return ;
     }
 
-    if( this.iCurPlayTime == bbdataitem.time ) {
+    if( this.iCurPlayTime === bbdataitem.time ) {
         barIndex = this.barSize - 1;
     } else {
         barIndex = this.barSize - Math.round( (this.iCurPlayTime-bbdataitem.time )/this.dataSamplePeriod );
@@ -276,15 +283,15 @@ Bitrate.drawBar = function( bbdataitem) {
         return;
     }
 
-    if( barIndex == (this.barSize -1) ) {
+    if( barIndex === (this.barSize -1) ) {
         //update bitrate level
         this.onBitrateChange(bbdataitem.bitrate);
     }
 
 
-     // draw bandwidth bar    
+     // draw bandwidth bar
     var divBandwidthBar = document.getElementById("bandwidth"+barIndex);
-    if( divBandwidthBar  == null ) {
+    if( divBandwidthBar  === null ) {
         alert("warning :  divBandwidthBar  = null ");
         return;
     }
@@ -292,37 +299,37 @@ Bitrate.drawBar = function( bbdataitem) {
     var barX = graph_x + graph_bar_interval*barIndex;
     divBandwidthBar.style.left =barX +"px";
 
-    //  convert bandwidth to pixel     :  use   this.nPixelPerMbps 
-    var barHeight = Math.round((bbdataitem.bandwidth * this.nPixelPerMbps  )/1000000 ); 
+    //  convert bandwidth to pixel     :  use   this.nPixelPerMbps
+    var barHeight = Math.round((bbdataitem.bandwidth * this.nPixelPerMbps  )/1000000 );
     if( barHeight > graph_maxHeight ) barHeight = graph_maxHeight;
 
     var barT =  graph_ybase - barHeight;
-    divBandwidthBar.style.top = barT + "px"; 
+    divBandwidthBar.style.top = barT + "px";
     divBandwidthBar.style.width = graph_bar_width +"px";
     divBandwidthBar.style.height = barHeight +"px";
     divBandwidthBar.style.visibility="visible";
 
 
-   // draw bitrate bar   
+   // draw bitrate bar
     var divBitrateBar = document.getElementById("bitrate"+barIndex);
-    if( divBitrateBar  == null )
+    if( divBitrateBar  === null )
      {
         alert("warning :  divBitrateBar  = null ");
         return;
      }
 
-    barX = graph_x + graph_bar_interval*barIndex+graph_bar_width;  
+    barX = graph_x + graph_bar_interval*barIndex+graph_bar_width;
     divBitrateBar.style.left =barX +"px";
 
-    //  convert bitrate to pixel     :  use   this.nPixelPerMbps 
-    barHeight = Math.round((bbdataitem.bitrate * this.nPixelPerMbps  )/1000000 ); 
+    //  convert bitrate to pixel     :  use   this.nPixelPerMbps
+    barHeight = Math.round((bbdataitem.bitrate * this.nPixelPerMbps  )/1000000 );
     if( barHeight > graph_maxHeight ) {
         barHeight = graph_maxHeight;
     }
 
     barT =  graph_ybase - barHeight;
     //graph_maxHeight
-    divBitrateBar.style.top = barT + "px"; 
+    divBitrateBar.style.top = barT + "px";
     divBitrateBar.style.width = graph_bar_width +"px";
     divBitrateBar.style.height = barHeight +"px";
     divBitrateBar.style.visibility="visible";
@@ -341,7 +348,7 @@ Bitrate.initBitrateLevel = function() {
     if( bitrates.length <= 0 ) {
         return;
     }
-    this.print("Bitrate.initBitrateLevel : " + bitrates);    
+    this.print("Bitrate.initBitrateLevel : " + bitrates);
     this.bitrateLevelArray = String(bitrates).split("|");
 
     var maxBitrateRange = this.bitrateLevelArray[ this.bitrateLevelArray.length-1 ];
@@ -354,21 +361,21 @@ Bitrate.initBitrateLevel = function() {
 };
 
 Bitrate.onBitrateChange = function(bitrate) {
-    if( this.bitrateLevelArray == null ) {
+    if( this.bitrateLevelArray === null ) {
         this.initBitrateLevel();
     }
 
-    if( this.bitrateLevelArray.length == 0 ) {
+    if( this.bitrateLevelArray.length === 0 ) {
         this.bitrateLevelArray = null;
         return;
     }
 
-    if( this.curBitrate == bitrate) {
+    if( this.curBitrate === bitrate) {
         return;
     }
 
     for(var i=0;i<this.bitrateLevelArray.length; i++) {
-        if(  bitrate == this.bitrateLevelArray[i]  ) {
+        if(  bitrate === this.bitrateLevelArray[i]  ) {
             this.curBitrate = bitrate;
             this.drawCurBitrateLevel(i, this.bitrateLevelArray.length );
             this.print("Bitrate.onBitrateChange  curLevel : " + i + ",    bitrate : " + bitrate );
@@ -394,7 +401,7 @@ Bitrate.drawCurBitrateLevel = function (curLevel, LevelSize) {
 
     //remove child element
     while(levelgraphDiv.firstChild) {
-        levelgraphDiv.removeChild(levelgraphDiv.firstChild); 
+        levelgraphDiv.removeChild(levelgraphDiv.firstChild);
     }
 
     //create child element

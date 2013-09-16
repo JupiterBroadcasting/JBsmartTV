@@ -4,10 +4,10 @@
  *@author 삼성 SDS, ESDM개발, 김성태선임
  *@date   2009.02.18
  */
-if (this.Common == null) {
+if (this.Common === null) {
     this.Common = new Object();
 }
-if (this.Common.API == null) {
+if (this.Common.API === null) {
     this.Common.API = new Object();
 }
 
@@ -81,13 +81,13 @@ Common.API.TVKeyValue = function(){
     this.KEY_MTS = 655;
     this.KEY_12 = 1057;
     this.KEY_DISC_MENU = 1086;
-    this.KEY_3D = 1219;	
+    this.KEY_3D = 1219;
     this.KEY_PIP_ONOFF = 1032;
     this.KEY_AD = 1039;
     this.KEY_PMODE = 1040;
     this.KEY_SMODE = 1043;
     this.KEY_PIP_CHUP = 1050;
-    this.KEY_PIP_CHDOWN = 1051;	
+    this.KEY_PIP_CHDOWN = 1051;
     this.KEY_FF_ = 1078;
     this.KEY_REWIND_ = 1080;
     this.KEY_SUB_TITLE = 1089;

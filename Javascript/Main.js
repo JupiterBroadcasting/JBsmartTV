@@ -89,27 +89,27 @@ Main.keyDown = function() {
 
         case tvKey.KEY_FF:
             alert("FF");
-            if(Player.getState() != Player.PAUSED)
+            if(Player.getState() !== Player.PAUSED)
                 Player.skipForwardVideo();
         break;
 
         case tvKey.KEY_RW:
             alert("RW");
-            if(Player.getState() != Player.PAUSED)
+            if(Player.getState() !== Player.PAUSED)
                 Player.skipBackwardVideo();
         break;
 
         case tvKey.KEY_VOL_UP:
         case tvKey.KEY_PANEL_VOL_UP:
             alert("VOL_UP");
-            if(this.mute == 0)
+            if(this.mute === 0)
                 Audio.setRelativeVolume(0);
         break;
 
         case tvKey.KEY_VOL_DOWN:
         case tvKey.KEY_PANEL_VOL_DOWN:
             alert("VOL_DOWN");
-            if(this.mute == 0) {
+            if(this.mute === 0) {
                 Audio.setRelativeVolume(1);
             }
         break;
@@ -197,7 +197,7 @@ Main.selectPreviousVideo = function(up) {
 };
 
 Main.setFullScreenMode = function() {
-    if (this.mode != this.FULLSCREEN) {
+    if (this.mode !== this.FULLSCREEN) {
         Display.hide();
         Player.setFullscreen();
         this.mode = this.FULLSCREEN;
@@ -205,7 +205,7 @@ Main.setFullScreenMode = function() {
 };
 
 Main.setWindowMode = function() {
-    if (this.mode != this.WINDOW) {
+    if (this.mode !== this.WINDOW) {
         Display.show();
         Player.setWindow();
         this.mode = this.WINDOW;
@@ -229,7 +229,7 @@ Main.toggleMode = function() {
 };
 
 Main.setMuteMode = function() {
-    if (this.mute != this.YMUTE) {
+    if (this.mute !== this.YMUTE) {
         var volumeElement = document.getElementById("volumeInfo");
         Audio.plugin.SetSystemMute(true);
         document.getElementById("volumeBar").style.backgroundImage = "url(Images/videoBox/muteBar.png)";
@@ -240,7 +240,7 @@ Main.setMuteMode = function() {
 };
 
 Main.noMuteMode = function() {
-    if (this.mute != this.NMUTE) {
+    if (this.mute !== this.NMUTE) {
         Audio.plugin.SetSystemMute(false);
         document.getElementById("volumeBar").style.backgroundImage = "url(Images/videoBox/volumeBar.png)";
         document.getElementById("volumeIcon").style.backgroundImage = "url(Images/videoBox/volume.png)";

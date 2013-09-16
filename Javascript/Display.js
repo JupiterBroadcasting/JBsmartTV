@@ -29,10 +29,10 @@ Display.setTime = function(time) {
     var timeHTML = "";
     var timeHour = 0; var timeMinute = 0; var timeSecond = 0;
     var totalTimeHour = 0; var totalTimeMinute = 0; var totalTimeSecond = 0;
-    
+
     document.getElementById("progressBar").style.width = timePercent + "%";
-    
-    if(Player.state == Player.PLAYING) {
+
+    if(Player.state === Player.PLAYING) {
         totalTimeHour = Math.floor(this.totalTime/3600000);
         timeHour = Math.floor(time/3600000);
         totalTimeMinute = Math.floor((this.totalTime%3600000)/60000);
@@ -40,8 +40,8 @@ Display.setTime = function(time) {
         totalTimeSecond = Math.floor((this.totalTime%60000)/1000);
         timeSecond = Math.floor((time%60000)/1000);
         timeHTML = timeHour + ":";
-        
-        if(timeMinute == 0) {
+
+        if(timeMinute === 0) {
             timeHTML += "00:";
         } else if(timeMinute <10) {
             timeHTML += "0" + timeMinute + ":";
@@ -49,7 +49,7 @@ Display.setTime = function(time) {
             timeHTML += timeMinute + ":";
         }
 
-        if(timeSecond == 0) {
+        if(timeSecond === 0) {
             timeHTML += "00/";
         } else if(timeSecond <10) {
             timeHTML += "0" + timeSecond + "/";
@@ -59,7 +59,7 @@ Display.setTime = function(time) {
 
         timeHTML += totalTimeHour + ":";
 
-        if(totalTimeMinute == 0) {
+        if(totalTimeMinute === 0) {
             timeHTML += "00:";
         } else if(totalTimeMinute <10) {
             timeHTML += "0" + totalTimeMinute;
@@ -67,7 +67,7 @@ Display.setTime = function(time) {
             timeHTML += totalTimeMinute;
         }
 
-        if(totalTimeSecond == 0) {
+        if(totalTimeSecond === 0) {
             timeHTML += "00";
         } else if(totalTimeSecond <10) {
             timeHTML += "0" + totalTimeSecond;
@@ -94,7 +94,7 @@ Display.setVolume = function(level) {
 
 Display.setVideoList = function(nameList) {
     var listHTML = "";
-    
+
     var i=0;
     for (var name in nameList) {
         this.videoList[i] = document.getElementById("video"+i);
@@ -116,38 +116,38 @@ Display.setVideoListPosition = function(position, move) {
 
     listHTML = (position + 1) + " / " + Data.getVideoCount();
     widgetAPI.putInnerHTML(document.getElementById("videoCount"), listHTML);
-    
+
     if(Data.getVideoCount() < 5) {
         for (var i = 0; i < Data.getVideoCount(); i++) {
-            if(i == position) {
+            if(i === position) {
                 this.videoList[i].style.backgroundImage= "url(Images/listBox/selector.png)";
             } else {
                 this.videoList[i].style.backgroundImage= "url(none)";
             }
         }
-    } else if((this.currentWindow!=this.LASTIDX && move==Main.DOWN) || (this.currentWindow!=this.FIRSTIDX && move==Main.UP)) {
-        if(move == Main.DOWN) {
+    } else if((this.currentWindow!==this.LASTIDX && move===Main.DOWN) || (this.currentWindow!==this.FIRSTIDX && move===Main.UP)) {
+        if(move === Main.DOWN) {
             this.currentWindow ++;
         } else {
             this.currentWindow --;
         }
 
         for (var i = 0; i <= this.LASTIDX; i++) {
-            if(i == this.currentWindow) {
+            if(i === this.currentWindow) {
                 this.videoList[i].style.backgroundImage= "url(Images/listBox/selector.png)";
             } else {
                 this.videoList[i].style.backgroundImage= "url(none)";
             }
         }
-    } else if(this.currentWindow == this.LASTIDX && move == Main.DOWN) {
-        if(position == this.FIRSTIDX) {
+    } else if(this.currentWindow === this.LASTIDX && move === Main.DOWN) {
+        if(position === this.FIRSTIDX) {
             this.currentWindow = this.FIRSTIDX;
-            
+
             for(var i = 0; i <= this.LASTIDX; i++) {
                 listHTML = Data.videoNames[i] ;
                 widgetAPI.putInnerHTML(this.videoList[i], listHTML);
-                
-                if(i == this.currentWindow) {
+
+                if(i === this.currentWindow) {
                     this.videoList[i].style.backgroundImage= "url(Images/listBox/selector.png)";
                 } else {
                     this.videoList[i].style.backgroundImage= "url(none)";
@@ -159,15 +159,15 @@ Display.setVideoListPosition = function(position, move) {
                 widgetAPI.putInnerHTML(this.videoList[i], listHTML);
             }
         }
-    } else if(this.currentWindow == this.FIRSTIDX && move == Main.UP) {
-        if(position == Data.getVideoCount()-1) {
+    } else if(this.currentWindow === this.FIRSTIDX && move === Main.UP) {
+        if(position === Data.getVideoCount()-1) {
             this.currentWindow = this.LASTIDX;
-            
+
             for(var i = 0; i <= this.LASTIDX; i++) {
                 listHTML = Data.videoNames[i + position - this.currentWindow] ;
                 widgetAPI.putInnerHTML(this.videoList[i], listHTML);
-                
-                if(i == this.currentWindow) {
+
+                if(i === this.currentWindow) {
                     this.videoList[i].style.backgroundImage= "url(Images/listBox/selector.png)";
                 } else {
                     this.videoList[i].style.backgroundImage= "url(none)";
