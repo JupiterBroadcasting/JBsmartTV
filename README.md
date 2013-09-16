@@ -2,6 +2,7 @@ JBsmartTV
 =========
 
 Samsung SmartTV Application for Jupiter Broadcasting
+This application is based off of Samsung's Development Guide found http://www.samsungdforum.com/Guide/tut00062/index.html
 
 ### TODO List
 * ~~Live Stream~~  
