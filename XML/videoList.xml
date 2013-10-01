@@ -4,7 +4,12 @@
         <item>
             <title>Jupiter Broadcasting</title>
             <link>http://videocdn-us.geocdn.scaleengine.net/jblive-iphone/live/jblive.stream/playlist.m3u8|COMPONENT=HLS</link>
-            <description>JB Live Stream</description>
+            <description>JB iPhone Live Stream</description>
+        </item>
+        <item>
+            <title>Jupiter Broadcasting</title>
+            <link>rtsp://videocdn-us.geocdn.scaleengine.net/jblive/live/jblive.stream|COMPONENT=RTSP</link>
+            <description>JB RTSP Live Stream</description>
         </item>
     </channel>
 </rss>
