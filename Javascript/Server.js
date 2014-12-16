@@ -4,7 +4,8 @@ var Server =
     dataReceivedCallback : null,
     
     XHRObj : null,
-    url : "XML/videoList.xml"
+    url : "http://feeds2.feedburner.com/AllJupiterVideos?format=xml"
+    //url : "XML/videoList.xml"
 };
 
 Server.init = function()
@@ -69,18 +70,26 @@ Server.createVideoList = function()
             var videoNames = [ ];
             var videoURLs = [ ];
             var videoDescriptions = [ ];
+  
+            //Add Live stream Link
+            videoNames[0] = "Jupiter Broadcasting";
+            videoURLs[0] = "http://jblive.videocdn.scaleengine.net/jb-live/play/jblive.stream/playlist.m3u8|COMPONENT=HLS";
+            videoDescriptions[0] = "JB Live Stream"
             
             for (var index = 0; index < items.length; index++)
             {
                 var titleElement = items[index].getElementsByTagName("title")[0];
                 var descriptionElement = items[index].getElementsByTagName("description")[0];
-                var linkElement = items[index].getElementsByTagName("link")[0];
+                //var linkElement = items[index].getElementsByTagName("link")[0];
+                var enclosureElement = items[index].getElementsByTagName("enclosure")[0];
                 
-                if (titleElement && descriptionElement && linkElement)
+                if (titleElement && descriptionElement && enclosureElement)
                 {
-                    videoNames[index] = titleElement.firstChild.data;
-                    videoURLs[index] = linkElement.firstChild.data;
-                    videoDescriptions[index] = descriptionElement.firstChild.data;
+                    videoNames[index+1] = '<div class="showTitle">' + ((titleElement.firstChild.data).replace(' | ', '</div><div class="showName">'))+'</div>';
+                    videoURL = enclosureElement.getAttribute('url');
+                    videoURL = videoURL.replace('www.podtrac.com/pts/redirect.mp4/', '');
+                    videoURLs[index+1] = videoURL; 
+                    videoDescriptions[index+1] = descriptionElement.firstChild.data;
                 }
             }
         
